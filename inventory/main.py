@@ -26,20 +26,14 @@ product = Product(
 
 product.save()
 print(product.pk)
+print(product.name)
 
 @app.get('/products')
 def all():
     return Product.all_pks()
 
-# @app.post('/products', response_model=None)
-# def create(product: Product):
-#     product = Product(
-#         name="Parker",
-#         price=100,
-#         quantity=100
-#     )
-#     return product.save()
     
-@app.post('/products',response_model=Product)
-def create(product: Product):
+@app.post('/products')
+async def create(product: Product):
+    print(product)
     return product.save()
