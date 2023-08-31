@@ -1,1 +1,4 @@
 inventory/credientals.py
+__pycache__
+.pytest_cache
+inventory/__pycache__

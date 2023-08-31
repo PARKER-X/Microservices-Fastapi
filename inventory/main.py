@@ -35,7 +35,7 @@ def all():
 
     
 @app.post('/products')
-async def create(product: Product):
+def create(product: Product):
     print(product)
     return product.save()
 
