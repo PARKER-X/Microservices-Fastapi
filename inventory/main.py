@@ -30,10 +30,29 @@ print(product.name)
 
 @app.get('/products')
 def all():
-    return Product.all_pks()
+    # return Product.all_pks()
+    return [ format(pk) for pk in Product.all_pks()]
 
     
 @app.post('/products')
 async def create(product: Product):
     print(product)
     return product.save()
+
+
+def format(pk:str):
+    product = Product.get(pk)
+    return {
+        "id",product.pk,
+        "name",product.name,
+        "price",product.price,
+        "quantity",product.quantity
+    }
+
+@app.get("/products/{pk}")
+def get(pk:str):
+    return Product.get(pk)
+
+@app.delete('/products/{pk}')
+def delete(pk:str):
+    return product.delete(pk)
