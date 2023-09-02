@@ -52,4 +52,4 @@ async def create(request:Request,background_tasks=BackgroundTasks):
 def order_completed(order:Order):
     order.status = "completed"
     order.save()
-
+    redis.xadd('order_completed',order.dict(),'*')  # * for auto generated id and xadd is redis stream functionality to add adds a new entry to a stream.
