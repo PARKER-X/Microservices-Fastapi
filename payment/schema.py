@@ -11,3 +11,5 @@ class Order(HashModel):
 
     class Meta:
         database = redis
+
+#Hashmodel docs = https://github.com/redis/redis-om-python/blob/main/docs/models.md

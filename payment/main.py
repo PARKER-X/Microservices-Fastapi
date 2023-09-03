@@ -1,3 +1,4 @@
+# Imports
 from fastapi import FastAPI
 from .schema import Order
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,6 +9,7 @@ import requests
 
 
 
+# APP
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -15,6 +17,8 @@ app.add_middleware(
     allow_methods = ['*'],
     allow_headers=['*']
 )
+
+# Checking Redis connection 
 redis.set('test' ,'hello world')
 print(redis.get('test'))
 
@@ -22,6 +26,7 @@ print(redis.get('test'))
 @app.get('/orders/{pk}')
 def get(pk:str):
     return Order.get(pk)
+
 
 @app.post('/orders')
 async def create(request:Request,background_tasks=BackgroundTasks):
@@ -53,3 +58,4 @@ def order_completed(order:Order):
     order.status = "completed"
     order.save()
     redis.xadd('order_completed',order.dict(),'*')  # * for auto generated id and xadd is redis stream functionality to add adds a new entry to a stream.
+
