@@ -25,6 +25,8 @@ print(redis.get('test'))
 
 @app.get('/orders/{pk}')
 def get(pk:str):
+    # order = Order.get(pk)
+    # redis.xadd('refund_order',order.dict(),'*')
     return Order.get(pk)
 
 
